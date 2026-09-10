@@ -28,8 +28,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+}, {
+  timestamps: true,
 });
-
 const User = mongoose.model("UserTable", userSchema);
 
 export default User;
