@@ -1,17 +1,17 @@
-import express from "express";
+// import express from "express";
 
-import {
-  createPaste,
-  getPaste,
-  deletePaste,
-} from "../controllers/pasteController.ts";
+// import {
+//   createPaste,
+//   getPaste,
+//   deletePaste,
+// } from "../controllers/pasteController.ts";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post("/", createPaste);
+// router.post("/", createPaste);
 
-router.get("/:shortId", getPaste);
+// router.get("/:shortId", getPaste);
 
-router.delete("/:shortId", deletePaste);
+// router.delete("/:shortId", deletePaste);
 
-export default router;
+// export default router;

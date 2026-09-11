@@ -1,13 +1,22 @@
 import express from "express";
-import { getMe, login, logout, register } from "../controllers/userController.ts";
-import { protect } from "../middleware/authmiddleware.ts";
+import {
+  getDashboard,
+  getMe,
+  login,
+  logout,
+  register,
+} from "../controllers/userController.ts";
+import authMiddleware from "../middleware/authmiddleware.ts";
+import { roleMiddleware } from "../middleware/roleMiddleware.ts";
 
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
 
+router.get("/dashboard", authMiddleware, getDashboard);
+
 router.post("/logout", logout);
 
-router.post("/me", protect, getMe)
+router.get("/me", authMiddleware, getMe);
 export default router;

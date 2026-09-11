@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import { connectDb } from "./config/connectDb.ts";
-import pasteRoutes from "./routes/pasteRoutes.ts";
+// import pasteRoutes from "./routes/pasteRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
-
+import projectRoutes from "./routes/pasteRoutes.ts";
 dotenv.config();
 
 const app = express();
@@ -30,13 +30,14 @@ app.use(cookieParser());
 // Root routech
 app.get("/", (req, res) => {
   res.json({
-    message: "Pastebin API is running",
+    message: "API is running",
   });
 });
 
 // API routes
-app.use("/api/pastes", pasteRoutes);
+// app.use("/api/pastes", pasteRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
 
 // 404 route - MUST BE LAST
 app.use((req, res) => {

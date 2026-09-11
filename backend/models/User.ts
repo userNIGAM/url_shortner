@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  organization:{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'organization',
+    required : true
+  },
+  role : {
+    type : String,
+    enum : ["owner","admin","member",],
+    default : "member"
+  }
 }, {
   timestamps: true,
 });
