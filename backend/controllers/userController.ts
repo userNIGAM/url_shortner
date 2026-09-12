@@ -162,16 +162,17 @@ export const login = async (req: any, res: any) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({
-      userId : user._id.toString(),
-      organizationId : user.organization.toString(),
-      role : user.role,
-    },
-    process.env.JWT_SECRET as string,
-    {
-      expiresIn : "7d"
-    }
-  )
+    const token = jwt.sign(
+      {
+        userId: user._id.toString(),
+        organizationId: user.organization.toString(),
+        role: user.role,
+      },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: "7d",
+      },
+    );
 
     // Set cookie
     setAuthCookie(res, token);
@@ -183,8 +184,8 @@ export const login = async (req: any, res: any) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        role : user.role,
-        organization : user.organization, 
+        role: user.role,
+        organization: user.organization,
       },
     });
   } catch (error) {
@@ -268,16 +269,15 @@ export const getDashboard = async (req: any, res: any) => {
   }
 };
 
-
 /*
 
             products controller
 
 */
-export const createProject = async(req : any, res : any)=>{
-  try{
-    const {name, description} = req.body;
-
+export const createProject = async (req: any, res: any) => {
+  try {
+    const { name, description } = req.body;
+    console.log(name, description);
     // Validate input
     if (!name) {
       return res.status(400).json({
@@ -286,24 +286,47 @@ export const createProject = async(req : any, res : any)=>{
       });
     }
 
+    //create project
     const project = await Project.create({
       name,
       description,
-      organization : req.user.organization
-    })
+      organization: req.user.organization,
+    });
 
     return res.status(201).json({
-      success : true,
-      message : "Project Created Successfully",
+      success: true,
+      message: "Project Created Successfully",
       project,
-    })
-  }catch(error){
-    console.error("Create Project Error :",error)
+    });
+  } catch (error) {
+    console.error("Create Project Error :", error);
 
     return res.status(500).json({
-      success : false,
-      message : "Something Went Wrong"
-    })
+      success: false,
+      message: "Something Went Wrong",
+    });
   }
+};
 
-}
+/*
+
+              Get Projects
+
+*/
+
+export const getProjects = async (req: any, res: any) => {
+  try {
+    const projects = await Project.find({
+      organization: req.user.organization,
+    });
+    return res.status(200).json({
+      success: true,
+      projects,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something Went Wrong",
+    });
+  }
+};
