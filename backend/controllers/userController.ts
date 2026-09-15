@@ -1,10 +1,10 @@
 import User from "../models/User.ts";
 import bcrypt from "bcryptjs";
 import Organization from "../models/Organization.ts";
-import generateToken from "../helper/generateToken.js";
 import setAuthCookie from "../helper/setAuthCookie.js";
 import jwt from "jsonwebtoken";
 import Project from "../models/Project.ts";
+
 export const register = async (req: any, res: any) => {
   try {
     const { organizationName, name, email, password } = req.body;

@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 
+
 // 404 route - MUST BE LAST
 app.use((req, res) => {
   res.status(404).json({
