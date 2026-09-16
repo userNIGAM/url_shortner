@@ -6,7 +6,9 @@ import cookieParser from "cookie-parser";
 import { connectDb } from "./config/connectDb.ts";
 // import pasteRoutes from "./routes/pasteRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
-import projectRoutes from "./routes/projectRoutes.ts"
+import projectRoutes from "./routes/projectRoutes.ts";
+import memberRoutes from "./routes/memberRoutes.ts";
+
 dotenv.config();
 
 const app = express();
@@ -38,7 +40,7 @@ app.get("/", (req, res) => {
 // app.use("/api/pastes", pasteRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
-
+app.use("/api/members", memberRoutes);
 
 // 404 route - MUST BE LAST
 app.use((req, res) => {
