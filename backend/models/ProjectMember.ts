@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import User from "./User";
-import Project from "./Project";
 
 const projectMemberSchema = new mongoose.Schema(
   {
